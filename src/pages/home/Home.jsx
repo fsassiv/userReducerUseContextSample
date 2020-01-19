@@ -10,8 +10,8 @@ const Home = props => {
     console.log(userState, historyState);
     userDispatch({ type: "SET_CURRENT_USER", payload: { name: "Sinner" } });
     historyDispatch({ type: "SET_CURRENT_USER", payload: { name: "History" } });
-  }, [props]);
-  console.log(userState, historyState);
+  }, []);
+  // console.log(userState, historyState);
   return <div>Home</div>;
 };
 
