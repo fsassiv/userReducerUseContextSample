@@ -56,7 +56,7 @@ function App(props) {
               )
             }
           />
-          <Route exact path="/reactmusic/login" component={Login} />
+          {/* <Route exact path="/reactmusic/login" component={Login} /> */}
           {/* Catch all route */}
           {/* <Route path="/*" render={() => <Redirect to="/reactmusic" />} /> */}
         </Suspense>
