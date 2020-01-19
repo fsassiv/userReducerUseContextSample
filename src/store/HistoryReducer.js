@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   error: null
 };
 
+//copia do userReducer, somente para testar nested Context
 export const historyReducer = (state, action) => {
   switch (action.type) {
     case "SET_CURRENT_USER":
