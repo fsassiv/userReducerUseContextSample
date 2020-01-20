@@ -1,32 +1,19 @@
-import React, { useReducer, createContext } from "react";
-export const UserContext = createContext();
+import { UserActionTypes } from "./actionTypes";
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   user: null,
   error: null
 };
 
 export const userReducer = (state, action) => {
   switch (action.type) {
-    case "SET_CURRENT_USER":
+    case UserActionTypes.SET_CURRENT_USER:
       return { ...state, user: action.payload };
-    case "LOGIN_USER":
+    case UserActionTypes.LOGIN_USER:
       return { ...state, user: action.payload };
-    case "LOGOUT_USER":
+    case UserActionTypes.LOGOUT_USER:
       return { ...state, user: null };
     default:
       return state;
   }
 };
-
-const UserContextComponent = ({ children }) => {
-  const [userState, userDispatch] = useReducer(userReducer, INITIAL_STATE);
-
-  return (
-    <UserContext.Provider value={{ userState, userDispatch }}>
-      {children}
-    </UserContext.Provider>
-  );
-};
-
-export default UserContextComponent;

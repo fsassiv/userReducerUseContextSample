@@ -1,6 +1,23 @@
+// xs, extra-small: 0px
+// sm, small: 600px
+// md, medium: 960px
+// lg, large: 1280px
+// xl, extra-large: 1920px
 * {
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  min-width: 100vw;
+}
+
+.img {
+  width: 100%;
 }

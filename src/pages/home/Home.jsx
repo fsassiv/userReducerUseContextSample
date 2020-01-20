@@ -1,18 +1,24 @@
 import React, { useEffect, useContext } from "react";
-// import UserContext from "../../context/user/user-context";
-import { UserContext } from "../../store/UserReducer";
-import { HistoryContext } from "../../store/HistoryReducer";
+import { UserContext } from "../../store/UserContext";
+import { HistoryContext } from "../../store/HistoryContext";
+import { UserActionTypes } from "./../../store/actionTypes";
 
 const Home = props => {
   const { userState, userDispatch } = useContext(UserContext);
   const { historyState, historyDispatch } = useContext(HistoryContext);
+
   useEffect(() => {
     console.log(userState, historyState);
-    userDispatch({ type: "SET_CURRENT_USER", payload: { name: "Sinner" } });
-    historyDispatch({ type: "SET_CURRENT_USER", payload: { name: "History" } });
   }, []);
-  // console.log(userState, historyState);
-  return <div>Home</div>;
+
+  const handleClick = () => {
+    userDispatch({ type: UserActionTypes.LOGOUT_USER });
+  };
+  return (
+    <div>
+      Home <button onClick={handleClick}>logOut</button>{" "}
+    </div>
+  );
 };
 
 export default Home;

@@ -3,15 +3,12 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "./Global.scss";
-import UserContextComponent from "./store/UserReducer";
-import HistoryContextComponent from "./store/HistoryReducer";
+import GlobalStore from "./store/GlobalStore";
 
 ReactDOM.render(
-  <UserContextComponent>
-    <HistoryContextComponent>
-      <App />
-    </HistoryContextComponent>
-  </UserContextComponent>,
+  <GlobalStore>
+    <App />
+  </GlobalStore>,
   document.getElementById("root")
 );
 

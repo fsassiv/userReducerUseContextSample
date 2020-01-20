@@ -1,67 +1,78 @@
-import React, { useState, useEffect, lazy, Suspense, useContext } from "react";
+import React, { useEffect, lazy, Suspense, useContext } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect
 } from "react-router-dom";
-// import UserContext from "./context/user/user-context";
 import Spinner from "./components/spinner/Spinner";
-import { UserContext } from "./store/UserReducer";
+import { UserContext } from "./store/UserContext";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
 
 //Routes
 const Home = lazy(() => import("./pages/home/Home.jsx"));
 const Login = lazy(() => import("./pages/login/Login.jsx"));
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      // Purple and green play nicely together.
+      main: "#000"
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: "#fff"
+    }
+  },
+  shape: {
+    borderRadius: 0
+  }
+});
+
 function App(props) {
-  const [user, setUser] = useState("oi");
   const { userState, userDispatch } = useContext(UserContext);
-  // const { user } = userState;
 
-  useEffect(() => {
-    console.log(userState);
-  }, []);
-
-  setTimeout(() => {
-    userDispatch({
-      type: "SET_CURRENT_USER",
-      payload: { name: "Sinner From App.js" }
-    });
-  }, 1000);
+  useEffect(() => {}, []);
 
   return (
-    <Router>
-      <Switch>
-        <Suspense fallback={<Spinner />}>
-          <Route exact path="/" render={() => <Redirect to="/reactmusic" />} />
-          <Route
-            exact
-            path="/reactmusic"
-            render={() =>
-              userState.user !== null ? (
-                <Home />
-              ) : (
-                <Redirect to="/reactmusic/login" />
-              )
-            }
-          />
-          <Route
-            exact
-            path="/reactmusic/login"
-            render={() =>
-              userState.user === null ? (
-                <Login />
-              ) : (
-                <Redirect to="/reactmusic" />
-              )
-            }
-          />
-          {/* <Route exact path="/reactmusic/login" component={Login} /> */}
-          {/* Catch all route */}
-          {/* <Route path="/*" render={() => <Redirect to="/reactmusic" />} /> */}
-        </Suspense>
-      </Switch>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Switch>
+          <Suspense fallback={<Spinner />}>
+            <Route
+              exact
+              path="/"
+              render={() => <Redirect to="/reactmusic" />}
+            />
+            <Route
+              exact
+              path="/reactmusic"
+              render={() =>
+                userState.user !== null ? (
+                  <Home />
+                ) : (
+                  <Redirect to="/reactmusic/login" />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/reactmusic/login"
+              render={() =>
+                userState.user === null ? (
+                  <Login />
+                ) : (
+                  <Redirect to="/reactmusic" />
+                )
+              }
+            />
+            {/* Catch all route */}
+            <Route path="*" render={() => <Redirect to="/" />} />
+          </Suspense>
+        </Switch>
+      </Router>
+    </ThemeProvider>
   );
 }
 

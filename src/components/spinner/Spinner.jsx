@@ -5,7 +5,7 @@ import "./spinner.scss";
 const Spinner = () => {
   return (
     <div className="spinner">
-      <img src={SpinnerGif} />
+      <img src={SpinnerGif} alt="spinner" />
     </div>
   );
 };
