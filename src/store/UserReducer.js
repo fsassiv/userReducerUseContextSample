@@ -7,9 +7,8 @@ export const INITIAL_STATE = {
 
 export const userReducer = (state, action) => {
   switch (action.type) {
-    case UserActionTypes.SET_CURRENT_USER:
-      return { ...state, user: action.payload };
     case UserActionTypes.LOGIN_USER:
+    case UserActionTypes.SET_CURRENT_USER:
       return { ...state, user: action.payload };
     case UserActionTypes.LOGOUT_USER:
       return { ...state, user: null };

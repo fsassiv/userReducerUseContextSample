@@ -35,6 +35,11 @@ function App(props) {
   const { userState, userDispatch } = useContext(UserContext);
 
   useEffect(() => {
+    //check if the users db is set, if not create it
+    if (!localStorage.getItem("users")) {
+      localStorage.setItem("users", JSON.stringify([]));
+    }
+
     const currentUser = localStorage.getItem("user");
 
     //Check for a logged user
@@ -43,6 +48,7 @@ function App(props) {
         type: UserActionTypes.SET_CURRENT_USER,
         payload: currentUser
       });
+    } else {
     }
   }, []);
 

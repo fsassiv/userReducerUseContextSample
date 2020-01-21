@@ -1,0 +1,40 @@
+.login--desktop {
+  display: -webkit-box;
+  display: flex;
+  &__section {
+    height: 100%;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    &.dark {
+      background-color: black;
+    }
+    &.wallpaper {
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+  &__form-wrapper {
+    color: white;
+    margin-right: 10%;
+    margin-left: 10%;
+    width: 100%;
+  }
+  &__btn-group {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+  }
+  &__btn {
+    color: rgba(white, 0.5);
+    font-weight: 300;
+    text-decoration: none;
+    &.active {
+      color: white;
+      font-weight: 500;
+    }
+  }
+}

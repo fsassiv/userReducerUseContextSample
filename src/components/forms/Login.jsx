@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import AppInput from "../../misc/AppInput";
+import { Alert } from "@material-ui/lab";
 import { Typography } from "@material-ui/core";
+import { getUser } from "../../api/users";
+import { UserContext } from "./../../store/UserContext";
+import { UserActionTypes } from "./../../store/actionTypes";
 import "./Login.scss";
 
 const Login = () => {
@@ -8,6 +12,17 @@ const Login = () => {
     email: "",
     password: ""
   });
+  const [alert, setAlert] = useState(false);
+  const [alertText, setAlertText] = useState("");
+
+  const [userDB, setUserDB] = useState([]);
+
+  const userContext = useContext(UserContext);
+
+  //Get the curretn state of userDB
+  useEffect(() => {
+    setUserDB(JSON.parse(localStorage.getItem("users")));
+  }, []);
 
   const handleInputChange = ({ target, value }) => {
     //Update credentials accordantly
@@ -16,12 +31,31 @@ const Login = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log("Submit", credentials);
+
+    const currentUser = getUser(credentials);
+
+    if (currentUser.length > 0) {
+      userContext.userDispatch({
+        type: UserActionTypes.SET_CURRENT_USER,
+        payload: {
+          id: currentUser[0].id,
+          name: currentUser[0].name,
+          email: currentUser[0].email
+        }
+      });
+    } else {
+      setAlert(true);
+      setAlertText("Email nao encontrado e/ou senha inválida");
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="login--mobile__form">
-      {" "}
+      {alert && (
+        <Alert variant="filled" color="error">
+          {alertText}
+        </Alert>
+      )}
       <Typography
         variant="h4"
         align="center"

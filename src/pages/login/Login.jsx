@@ -7,10 +7,10 @@ import "./Login.scss";
 const Login = () => {
   return (
     <div className="login">
-      <Hidden smUp>
+      <Hidden mdUp>
         <LoginMobile />
       </Hidden>
-      <Hidden xsDown>
+      <Hidden smDown>
         <LoginDesktop />
       </Hidden>
     </div>
