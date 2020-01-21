@@ -6,7 +6,7 @@ export const createNewUser = credentials => {
 
   const newUser = {
     id: uniqid(),
-    name,
+    name: name.replace(/^\w/, c => c.toUpperCase()),
     email,
     password
   };
@@ -14,7 +14,11 @@ export const createNewUser = credentials => {
   //save newUser in store
   const newUserDB = JSON.stringify([...userDB, newUser]);
   localStorage.setItem("users", newUserDB);
-
+  setCurrentSesstion({
+    id: newUser.id,
+    name: newUser.name,
+    email: newUser.email
+  });
   return { id: newUser.id, name: newUser.name, email: newUser.email };
 };
 
@@ -28,5 +32,17 @@ export const getUser = credentials => {
     }
   });
 
+  setCurrentSesstion({ ...registeredUser[0] });
   return registeredUser;
+};
+
+export const setCurrentSesstion = ({ id, name, email }) => {
+  const session = JSON.stringify({ id, name, email });
+
+  //set to the localStorage
+  localStorage.setItem("currentSesstion", session);
+};
+
+export const logOut = () => {
+  localStorage.removeItem("currentSesstion");
 };

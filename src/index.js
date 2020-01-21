@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "./Global.scss";
@@ -7,7 +8,9 @@ import GlobalStore from "./store/GlobalStore";
 
 ReactDOM.render(
   <GlobalStore>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </GlobalStore>,
   document.getElementById("root")
 );

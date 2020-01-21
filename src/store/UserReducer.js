@@ -1,4 +1,5 @@
 import { UserActionTypes } from "./actionTypes";
+import { logOut } from "../api/users";
 
 export const INITIAL_STATE = {
   user: null,
@@ -11,6 +12,8 @@ export const userReducer = (state, action) => {
     case UserActionTypes.SET_CURRENT_USER:
       return { ...state, user: action.payload };
     case UserActionTypes.LOGOUT_USER:
+      //remove the session from the localstorage
+      logOut();
       return { ...state, user: null };
     default:
       return state;
