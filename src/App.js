@@ -9,6 +9,7 @@ import Spinner from "./components/spinner/Spinner";
 import { UserContext } from "./store/UserContext";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
+import { UserActionTypes } from "./store/actionTypes";
 
 //Routes
 const Home = lazy(() => import("./pages/home/Home.jsx"));
@@ -33,7 +34,17 @@ const theme = createMuiTheme({
 function App(props) {
   const { userState, userDispatch } = useContext(UserContext);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const currentUser = localStorage.getItem("user");
+
+    //Check for a logged user
+    if (currentUser) {
+      userDispatch({
+        type: UserActionTypes.SET_CURRENT_USER,
+        payload: currentUser
+      });
+    }
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -68,7 +79,7 @@ function App(props) {
               }
             />
             {/* Catch all route */}
-            <Route path="*" render={() => <Redirect to="/" />} />
+            <Route path="*" render={() => <Redirect to="/reactmusic" />} />
           </Suspense>
         </Switch>
       </Router>

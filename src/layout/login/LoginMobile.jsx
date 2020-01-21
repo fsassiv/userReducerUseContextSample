@@ -5,12 +5,20 @@ import brandMb from "../../assets/brand-mb.jpg";
 import AppButton from "../../misc/AppButton";
 
 import "./LoginMobile.scss";
+import Login from "../../components/forms/Login";
+import SignUp from "../../components/forms/SignUp";
 
 const LoginMobile = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [loginForm, setLoginForm] = useState(true);
 
-  const handleAppButtonClick = e => {
-    console.log(e);
+  const handleAppButtonClick = ({ targetForm }) => {
+    //Set login by default
+    setLoginForm(true);
+    if (targetForm !== "login") {
+      //Set signup
+      setLoginForm(false);
+    }
     setOpenDrawer(true);
   };
 
@@ -25,22 +33,23 @@ const LoginMobile = () => {
         alt="reactMusic - brand"
       />
       <div className="login--mobile__btn-wrapper">
-        <AppButton btnLabel="Entrar" btnHandleClick={handleAppButtonClick} />
+        <AppButton
+          btnLabel="Entrar"
+          btnHandleClick={() => handleAppButtonClick({ targetForm: "login" })}
+        />
         <AppButton
           btnLabel="Criar nova conta"
-          btnHandleClick={handleAppButtonClick}
+          btnHandleClick={() => handleAppButtonClick({ targetForm: "signup" })}
         />
       </div>
       {/* Form Drawer */}
       <Drawer
         open={openDrawer}
         anchor="bottom"
-        onClose={e => setOpenDrawer(false)}
+        onClose={() => setOpenDrawer(false)}
       >
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. In,
-        distinctio? Nobis rem minus molestias dolorem libero modi velit qui
-        corporis necessitatibus. Recusandae reprehenderit optio nesciunt aliquid
-        fugit laborum nostrum nemo.
+        {/* check if the login form is set to true, if not, render de signup */}
+        {loginForm ? <Login /> : <SignUp />}
       </Drawer>
     </div>
   );

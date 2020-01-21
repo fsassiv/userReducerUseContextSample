@@ -1,6 +1,4 @@
-import React, { useEffect, useContext } from "react";
-import { UserContext } from "../../store/UserContext";
-import { UserActionTypes } from "./../../store/actionTypes";
+import React from "react";
 import { Hidden } from "@material-ui/core";
 import LoginMobile from "../../layout/login/LoginMobile";
 import LoginDesktop from "../../layout/login/LoginDesktop";

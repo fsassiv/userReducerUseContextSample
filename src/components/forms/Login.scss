@@ -1,0 +1,18 @@
+.login--mobile {
+  &__form {
+    width: 100%;
+    padding: 5% 5% 10%;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+  }
+  &__login-submit-btn {
+    background-color: #219653;
+    border: none;
+    color: white;
+    height: 40px;
+    font-size: 20px;
+  }
+}
