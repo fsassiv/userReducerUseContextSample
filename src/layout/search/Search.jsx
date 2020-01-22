@@ -8,7 +8,7 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
-  ButtonGroup
+  Typography
 } from "@material-ui/core";
 import "./Search.scss";
 import fetchResult from "../../api/lastfm";
@@ -30,6 +30,7 @@ const Search = () => {
   const [target, setTarget] = useState("artist");
   const [result, setResult] = useState("");
   const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
 
   const handleSearch = async event => {
     if (event) {
@@ -41,13 +42,18 @@ const Search = () => {
     //check if the searchValue is not empty
     if (searchValue !== "") {
       const data = await fetchResult({ target, searchValue, page });
-      setResult(data.results);
+      setTotal(data.results["opensearch:totalResults"]);
+      if (target === "artist") {
+        setResult(data.results.artistmatches);
+      }
+      if (target === "album") {
+        setResult(data.results.albummatches);
+      }
     }
   };
 
   const handleChange = async event => {
     setTarget(event.target.value);
-    handleSearch(event);
     //reset page to 1
     setPage(1);
   };
@@ -112,10 +118,12 @@ const Search = () => {
           </FormControl>
         </div>
       </form>
+      {/* Render results */}
       {result !== "" && (
         <SearchList
           listSrc={
-            target === "artist" ? result.artistmatches : result.albummatches
+            result
+            // target === "artist" ? result.artistmatches : result.albummatches
           }
           listType={target === "artist" ? "artist" : "album"}
         />
@@ -136,6 +144,9 @@ const Search = () => {
           Próximo
         </Button>
       </div>
+      <Typography style={{ position: "absolute", bottom: "10px" }} variant="h5">
+        Total {total}
+      </Typography>
     </div>
   );
 };

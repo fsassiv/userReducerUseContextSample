@@ -6,15 +6,8 @@ const SearchList = ({ listSrc, listType }) => {
 
   useEffect(() => {
     if (listSrc) {
-      if (listType === "artist") {
-        if (listSrc.artist !== "undefined") {
-          setList(listSrc.artist);
-        }
-      }
-      if (listType === "album") {
-        if (listSrc.album !== undefined) {
-          setList(listSrc.album);
-        }
+      for (const type in listSrc) {
+        setList(listSrc[type]);
       }
     }
   }, [listSrc, listType]);
