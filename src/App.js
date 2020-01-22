@@ -36,16 +36,16 @@ function App(props) {
       localStorage.setItem("users", JSON.stringify([]));
     }
 
-    const currentUser = localStorage.getItem("currentSesstion");
+    const currentUser = JSON.parse(sessionStorage.getItem("currentSession"));
     //Check for a logged user
     if (currentUser) {
       userDispatch({
         type: UserActionTypes.SET_CURRENT_USER,
-        payload: JSON.parse(currentUser)
+        payload: currentUser
       });
     } else {
       //Redirect not logged user
-      history.push("/");
+      history.push("/reactmusic/login");
     }
   }, []);
 

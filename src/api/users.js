@@ -40,7 +40,7 @@ export const setCurrentSesstion = ({ id, name, email }) => {
   const session = JSON.stringify({ id, name, email });
 
   //set to the localStorage
-  localStorage.setItem("currentSesstion", session);
+  sessionStorage.setItem("currentSession", session);
 };
 
 export const logOut = () => {

@@ -1,0 +1,14 @@
+.history {
+  min-height: 200px;
+  &__top {
+  }
+  &__tab {
+    &-btn {
+      display: inline-block;
+      margin-left: 10px;
+      &.active {
+        font-weight: bold;
+      }
+    }
+  }
+}
