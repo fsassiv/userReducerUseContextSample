@@ -1,0 +1,42 @@
+.list__item {
+  height: 60px;
+  width: 100%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  border-width: 1px;
+  border-style: solid;
+  margin-bottom: 5px;
+  padding: 0 10px;
+  &-cover {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    -o-object-fit: cover;
+    object-fit: cover;
+  }
+  &-info {
+    width: 80%;
+  }
+  &-label {
+    font-weight: bold;
+    font-size: 14px;
+  }
+  &-stats {
+    font-size: 12px;
+    font-weight: 300;
+  }
+  &.light {
+    border-color: black;
+    background-color: white;
+    color: black;
+  }
+  &.dark {
+    border-color: white;
+    color: white;
+    background-color: black;
+  }
+}

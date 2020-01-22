@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./HistoryContainer.scss";
-import HistoryArtistList from "./HistoryArtistList";
-import HistoryAlbumList from "./HistoryAlbumList";
+// import HistoryArtistList from "./HistoryArtistList";
+// import HistoryAlbumList from "./HistoryAlbumList";
+import HistoryList from "./HistoryList";
 
 const HistoryContainer = props => {
   const [tabOne, setTabOne] = useState(true);
@@ -38,7 +39,8 @@ const HistoryContainer = props => {
         </a>
       </div>
       <div className="history__tab-wrapper">
-        {tabOne ? <HistoryArtistList /> : <HistoryAlbumList />}
+        {/* {tabOne ? <HistoryArtistList /> : <HistoryAlbumList />} */}
+        {/* <HistoryList listLabel listSrc={[]} /> */}
       </div>
     </div>
   );

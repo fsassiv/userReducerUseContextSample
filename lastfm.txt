@@ -1,0 +1,4 @@
+Application name	reactmusic
+API key	23d94315217c996868a5f3feb48f00c3
+Shared secret	b4d4c94d7e60565a42c535de90c59af0
+Registered to	fsassiv

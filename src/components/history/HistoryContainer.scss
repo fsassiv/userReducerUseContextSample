@@ -1,5 +1,6 @@
 .history {
   min-height: 200px;
+  width: 50%;
   &__top {
   }
   &__tab {
@@ -9,6 +10,9 @@
       &.active {
         font-weight: bold;
       }
+    }
+    &-wrapper {
+      padding-top: 10px;
     }
   }
 }
