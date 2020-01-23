@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   TextField,
   Button,
@@ -13,6 +13,9 @@ import {
 import "./Search.scss";
 import fetchResult from "../../api/lastfm";
 import SearchList from "./SearchList";
+import { saveResultInHistory } from "../../api/history";
+import { UserContext } from "../../store/UserContext";
+import { UserActionTypes } from "../../store/actionTypes";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,6 +28,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Search = () => {
+  //get logged user info
+  const { userState, userDispatch } = useContext(UserContext);
+
   const classes = useStyles();
   const [searchValue, setSearchValue] = useState("");
   const [target, setTarget] = useState("artist");
@@ -37,7 +43,7 @@ const Search = () => {
       event.preventDefault();
     }
 
-    //clear the previe result
+    //clear the previous result
     setResult("");
     //check if the searchValue is not empty
     if (searchValue !== "") {
@@ -59,7 +65,7 @@ const Search = () => {
   };
 
   const handlePrevNext = goTo => {
-    //make sure it dont go below one
+    //make sure it doesnt go below one
     if (goTo === "prev") {
       if (page > 1) {
         setPage(page - 1);
@@ -72,8 +78,23 @@ const Search = () => {
 
   //update result on target change
   useEffect(() => {
+    //fires a new search after target or page change their values
     handleSearch();
+
+    saveResultInHistory({
+      userId: userState.user.id,
+      resultType: target,
+      resultValue: result
+    });
   }, [target, page]);
+
+  useEffect(() => {
+    saveResultInHistory({
+      userId: userState.user.id,
+      resultType: target,
+      resultValue: result
+    });
+  }, [result]);
 
   return (
     <div className="search">

@@ -8,7 +8,7 @@ export const INITIAL_STATE = {
 //copia do userReducer, somente para testar nested Context
 export const historyReducer = (state, action) => {
   switch (action.type) {
-    case HistoryActionTypes.DEFAULT_ACTION:
+    case HistoryActionTypes.SET_RESULT:
       return { ...state, history: action.payload };
     default:
       return state;

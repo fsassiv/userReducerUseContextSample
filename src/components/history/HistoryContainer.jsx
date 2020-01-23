@@ -40,7 +40,7 @@ const HistoryContainer = props => {
       </div>
       <div className="history__tab-wrapper">
         {/* {tabOne ? <HistoryArtistList /> : <HistoryAlbumList />} */}
-        {/* <HistoryList listLabel listSrc={[]} /> */}
+        {/* <HistoryList listType listSrc={[]} /> */}
       </div>
     </div>
   );
