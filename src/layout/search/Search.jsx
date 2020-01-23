@@ -44,7 +44,7 @@ const Search = () => {
     }
 
     //clear the previous result
-    setResult("");
+    // setResult("");
     //check if the searchValue is not empty
     if (searchValue !== "") {
       const data = await fetchResult({ target, searchValue, page });
@@ -76,24 +76,32 @@ const Search = () => {
     }
   };
 
-  //update result on target change
+  //update result on target and page changes
   useEffect(() => {
     //fires a new search after target or page change their values
     handleSearch();
 
-    saveResultInHistory({
-      userId: userState.user.id,
-      resultType: target,
-      resultValue: result
-    });
+    if (searchValue !== "") {
+      saveResultInHistory({
+        userId: userState.user.id,
+        resultType: target,
+        resultValue: result,
+        searchValue
+      });
+    }
   }, [target, page]);
 
+  //update result on result and changes
   useEffect(() => {
-    saveResultInHistory({
-      userId: userState.user.id,
-      resultType: target,
-      resultValue: result
-    });
+    if (searchValue !== "") {
+      saveResultInHistory({
+        userId: userState.user.id,
+        resultType: target,
+        resultValue: result,
+        searchValue
+      });
+    }
+    console.log("effect 2");
   }, [result]);
 
   return (

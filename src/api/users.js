@@ -44,5 +44,5 @@ export const setCurrentSesstion = ({ id, name, email }) => {
 };
 
 export const logOut = () => {
-  localStorage.removeItem("currentSesstion");
+  sessionStorage.removeItem("currentSession");
 };

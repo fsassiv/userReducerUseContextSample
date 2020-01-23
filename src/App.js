@@ -1,10 +1,11 @@
-import React, { useEffect, lazy, Suspense, useContext } from "react";
+import React, { useState, useEffect, lazy, Suspense, useContext } from "react";
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import Spinner from "./components/spinner/Spinner";
 import { UserContext } from "./store/UserContext";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import { UserActionTypes } from "./store/actionTypes";
+import { createUserHistory, getResultFromHistory } from "./api/history";
 
 //Routes
 const Home = lazy(() => import("./pages/home/Home.jsx"));
@@ -29,6 +30,7 @@ const theme = createMuiTheme({
 function App(props) {
   const { userState, userDispatch } = useContext(UserContext);
   const history = useHistory();
+  const [userHistory, setUserHistory] = useState("");
 
   useEffect(() => {
     //check if the users db is set, if not create it
@@ -47,7 +49,17 @@ function App(props) {
       //Redirect not logged user
       history.push("/reactmusic/login");
     }
+
+    //make sure the userHistory is set
+    createUserHistory();
   }, []);
+
+  //get currentUserHistory
+  useEffect(() => {
+    if (userState.user) {
+      setUserHistory(getResultFromHistory(userState.user.id));
+    }
+  }, [userState]);
 
   return (
     <ThemeProvider theme={theme}>
