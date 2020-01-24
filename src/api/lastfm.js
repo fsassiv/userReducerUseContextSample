@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiSettings = {
-  baseUrl: "http://ws.audioscrobbler.com/2.0/",
+  baseUrl: "https://ws.audioscrobbler.com/2.0/",
   key: "23d94315217c996868a5f3feb48f00c3"
 };
 
