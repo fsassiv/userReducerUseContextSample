@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import "./HistoryContainer.scss";
-import { HistoryActionTypes } from "../../store/actionTypes";
+// import { HistoryActionTypes } from "../../store/actionTypes";
 import { HistoryContext } from "../../store/HistoryContext";
 // import HistoryArtistList from "./HistoryArtistList";
 // import HistoryAlbumList from "./HistoryAlbumList";

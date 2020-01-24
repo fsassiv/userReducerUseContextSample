@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import AppInput from "../../misc/AppInput";
 import { Alert } from "@material-ui/lab";
 import { Typography } from "@material-ui/core";
@@ -15,14 +15,7 @@ const Login = () => {
   const [alert, setAlert] = useState(false);
   const [alertText, setAlertText] = useState("");
 
-  const [userDB, setUserDB] = useState([]);
-
   const userContext = useContext(UserContext);
-
-  //Get the curretn state of userDB
-  useEffect(() => {
-    setUserDB(JSON.parse(localStorage.getItem("users")));
-  }, []);
 
   const handleInputChange = ({ target, value }) => {
     //Update credentials accordantly

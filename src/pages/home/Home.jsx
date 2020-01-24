@@ -8,7 +8,6 @@ import { UserActionTypes } from "./../../store/actionTypes";
 import { createUserHistory } from "../../api/history";
 import brandMb from "../../assets/brand.jpg";
 import { Grid, Toolbar, Hidden, Drawer, AppBar } from "@material-ui/core";
-import Search from "../../layout/search/Search";
 import homeBg from "../../assets/home-bg-dt.png";
 import HomeMain from "../../layout/home/HomeMain";
 import HomeAside from "../../layout/home//HomeAside";

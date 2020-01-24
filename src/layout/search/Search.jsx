@@ -16,7 +16,7 @@ import SearchList from "./SearchList";
 import { saveResultInHistory, getResultFromHistory } from "../../api/history";
 import { UserContext } from "../../store/UserContext";
 import { HistoryContext } from "../../store/HistoryContext";
-import { UserActionTypes, HistoryActionTypes } from "../../store/actionTypes";
+import { HistoryActionTypes } from "../../store/actionTypes";
 
 const useStyles = makeStyles(() => ({
   root: {

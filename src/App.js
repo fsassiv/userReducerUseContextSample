@@ -1,12 +1,10 @@
-import React, { useState, useEffect, lazy, Suspense, useContext } from "react";
+import React, { useEffect, lazy, Suspense, useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Spinner from "./components/spinner/Spinner";
 import { UserContext } from "./store/UserContext";
-import { HistoryContext } from "./store/HistoryContext";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import { UserActionTypes } from "./store/actionTypes";
-import { createUserHistory, getResultFromHistory } from "./api/history";
 import { getCurrentSession } from "./api/users";
 
 //Routes
