@@ -5,6 +5,12 @@ const apiSettings = {
   key: "23d94315217c996868a5f3feb48f00c3"
 };
 
+if (process.env.NODE_ENV === "production") {
+  //CHANGE SETTINGS ON PRODUCTION
+  apiSettings.baseUrl = process.env.BASE_URL;
+  apiSettings.key = process.env.API_KEY;
+}
+
 export default async ({ target, searchValue, page }) => {
   try {
     const response = await axios.get(
