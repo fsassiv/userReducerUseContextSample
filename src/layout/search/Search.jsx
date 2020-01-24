@@ -108,6 +108,7 @@ const Search = () => {
       type: HistoryActionTypes.SET_USER_HISTORY,
       payload: getResultFromHistory(userState.user.id)
     });
+    // console.log(getResultFromHistory(userState.user.id));
   }, [page, result, target]);
 
   return (

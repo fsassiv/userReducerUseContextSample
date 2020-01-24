@@ -4,18 +4,20 @@ export const createUserHistory = ({
   userHistory = JSON.parse(localStorage.getItem("userHistory")),
   currentUserId
 }) => {
-  let newHistory = {};
+  let newHistory = {
+    userId: currentUserId,
+    history: {
+      artist: [],
+      album: []
+    }
+  };
   if (!userHistory) {
-    newHistory = [
-      {
-        userId: currentUserId,
-        history: {
-          artist: [],
-          album: []
-        }
-      }
-    ];
-    localStorage.setItem("userHistory", JSON.stringify([...newHistory]));
+    localStorage.setItem("userHistory", JSON.stringify([{ ...newHistory }]));
+  } else {
+    localStorage.setItem(
+      "userHistory",
+      JSON.stringify([...userHistory, newHistory])
+    );
   }
 };
 
@@ -83,5 +85,7 @@ export const getResultFromHistory = userId => {
     history => history.userId === userId
   );
   //return the current users history
-  return currentUserHistory[0].history || [];
+  return typeof currentUserHistory[0] !== "undefined"
+    ? currentUserHistory[0].history
+    : [];
 };

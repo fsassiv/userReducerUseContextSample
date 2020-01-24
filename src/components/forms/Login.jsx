@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import AppInput from "../../misc/AppInput";
 import { Alert } from "@material-ui/lab";
 import { Typography } from "@material-ui/core";
-import { getUser } from "../../api/users";
+import { logUser } from "../../api/users";
 import { UserContext } from "./../../store/UserContext";
 import { UserActionTypes } from "./../../store/actionTypes";
 import "./Login.scss";
@@ -32,7 +32,7 @@ const Login = () => {
   const handleSubmit = event => {
     event.preventDefault();
 
-    const currentUser = getUser(credentials);
+    const currentUser = logUser(credentials);
 
     if (currentUser.length > 0) {
       userContext.userDispatch({

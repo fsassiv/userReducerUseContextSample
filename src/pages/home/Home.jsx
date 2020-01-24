@@ -1,9 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import "./Home.scss";
 import AppButton from "../../misc/AppButton";
 import { UserContext } from "./../../store/UserContext";
 import { UserActionTypes } from "./../../store/actionTypes";
+import { createUserHistory } from "../../api/history";
 import brandMb from "../../assets/brand.jpg";
 import { Grid, Toolbar, Hidden, Drawer, AppBar } from "@material-ui/core";
 import Search from "../../layout/search/Search";
@@ -44,15 +46,16 @@ const useStyles = makeStyles(theme => ({
 function Home(props) {
   const { container } = props;
   const classes = useStyles();
-  const userContext = useContext(UserContext);
+  const { userState, userDispatch } = useContext(UserContext);
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const history = useHistory();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   const handleAppButtonClick = () => {
-    userContext.userDispatch({ type: UserActionTypes.LOGOUT_USER });
+    userDispatch({ type: UserActionTypes.LOGOUT_USER });
   };
 
   const drawer = (
@@ -61,7 +64,7 @@ function Home(props) {
       <div className="home__user-info">
         <p className="user-info-text light">Bem vindo,</p>
         <p className="user-info-text bold">
-          {userContext.userState.user.name.replace(/^\w/, c => c.toUpperCase())}
+          {userState.user.name.replace(/^\w/, c => c.toUpperCase())}
         </p>
       </div>
 
@@ -70,6 +73,24 @@ function Home(props) {
       </span>
     </aside>
   );
+
+  useEffect(() => {
+    const currentUser = JSON.parse(sessionStorage.getItem("currentSession"));
+
+    //Check for a logged user
+    if (currentUser) {
+      userDispatch({
+        type: UserActionTypes.SET_CURRENT_USER,
+        payload: currentUser
+      });
+    } else {
+      //Redirect not logged user
+      history.push("/reactmusic/login");
+    }
+
+    //make sure the userHistory is set
+    createUserHistory({ currentUserId: currentUser.id });
+  }, []);
 
   return (
     <div className={classes.root}>

@@ -18,7 +18,7 @@ const SignUp = () => {
   const [alertText, setAlertText] = useState("");
   const [userDB, setUserDB] = useState([]);
 
-  const userContext = useContext(UserContext);
+  const { userState, userDispatch } = useContext(UserContext);
 
   //Get the curretn state of userDB
   useEffect(() => {
@@ -70,7 +70,7 @@ const SignUp = () => {
       //uptade the state
       setUserDB(JSON.parse(localStorage.getItem("users")));
       //update the context and redirect to home
-      userContext.userDispatch({
+      userDispatch({
         type: UserActionTypes.SET_CURRENT_USER,
         payload: { ...newUser }
       });

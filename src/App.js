@@ -1,5 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense, useContext } from "react";
-import { Switch, Route, Redirect, useHistory } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Spinner from "./components/spinner/Spinner";
 import { UserContext } from "./store/UserContext";
 import { HistoryContext } from "./store/HistoryContext";
@@ -7,6 +7,7 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import { UserActionTypes } from "./store/actionTypes";
 import { createUserHistory, getResultFromHistory } from "./api/history";
+import { getCurrentSession } from "./api/users";
 
 //Routes
 const Home = lazy(() => import("./pages/home/Home.jsx"));
@@ -30,9 +31,6 @@ const theme = createMuiTheme({
 
 function App(props) {
   const { userState, userDispatch } = useContext(UserContext);
-  const { historyState, historyDispatch } = useContext(HistoryContext);
-  const history = useHistory();
-  // const [userHistory, setUserHistory] = useState("");
 
   useEffect(() => {
     //check if the users db is set, if not create it
@@ -40,32 +38,11 @@ function App(props) {
       localStorage.setItem("users", JSON.stringify([]));
     }
 
-    const currentUser = JSON.parse(sessionStorage.getItem("currentSession"));
-    //Check for a logged user
-    if (currentUser) {
-      userDispatch({
-        type: UserActionTypes.SET_CURRENT_USER,
-        payload: currentUser
-      });
-    } else {
-      //Redirect not logged user
-      history.push("/reactmusic/login");
-    }
-
-    //make sure the userHistory is set
-    createUserHistory({ currentUserId: currentUser.id });
+    userDispatch({
+      type: UserActionTypes.SET_CURRENT_USER,
+      payload: getCurrentSession()
+    });
   }, []);
-
-  //get currentUserHistory
-  // useEffect(() => {
-  //   if (userState.user) {
-  //     setUserHistory(getResultFromHistory(userState.user.id));
-  //   }
-  // }, [userState]);
-
-  // useEffect(() => {
-  //   console.log("history changed");
-  // }, [historyState]);
 
   return (
     <ThemeProvider theme={theme}>

@@ -55,7 +55,7 @@ const HistoryContainer = props => {
       {listSrc[listType] && (
         <HistoryList listType={listType} listSrc={listSrc[listType]} />
       )}
-      {!(Object.entries(listSrc).length>0 && listSrc[listType].length>0)?<p>Você ainda não possui históricos de busca...</p>:""}
+      {/* {!(Object.entries(listSrc).length>0 && listSrc[listType].length>0)?<p>Você ainda não possui históricos de busca...</p>:""} */}
     </div>
   );
 };
