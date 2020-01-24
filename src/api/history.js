@@ -1,13 +1,14 @@
 //save result of user search in localStorage
 //provite JSON.parse(localStorage.getItem("userHistory")) as default value
-export const createUserHistory = (
-  userHistory = JSON.parse(localStorage.getItem("userHistory"))
-) => {
+export const createUserHistory = ({
+  userHistory = JSON.parse(localStorage.getItem("userHistory")),
+  currentUserId
+}) => {
   let newHistory = {};
   if (!userHistory) {
     newHistory = [
       {
-        userId: "k5psa2hk",
+        userId: currentUserId,
         history: {
           artist: [],
           album: []
@@ -18,34 +19,61 @@ export const createUserHistory = (
   }
 };
 
-export const saveResultInHistory = ({
-  userId,
-  resultType,
-  resultValue,
-  searchValue
-}) => {
+export const saveResultInHistory = ({ userId, resultType, searchValue }) => {
   let userHistory = JSON.parse(localStorage.getItem("userHistory"));
-  let newUserHistory = "";
 
   const currentUserHistory = userHistory.filter(
     history => history.userId === userId
   );
 
-  let { userId: id, history: uHistory } = currentUserHistory[0];
+  saveRestult({
+    currentUserHistory,
+    userId,
+    userHistory,
+    searchValue,
+    resultType
+  });
+};
 
-  if (resultType === "artist") {
+const saveRestult = ({
+  currentUserHistory,
+  userId,
+  userHistory,
+  searchValue,
+  resultType
+}) => {
+  let newUserHistory = {};
+  //check if the user doesnt have a history
+  //if not, create it
+  if (currentUserHistory.length === 0) {
+    newUserHistory = {
+      userId,
+      history: {
+        [resultType]: [searchValue]
+      }
+    };
+    userHistory.push({ ...newUserHistory });
+
+    //save to the localStorage
+    localStorage.setItem("userHistory", JSON.stringify(userHistory));
+  } else {
+    //if the user already have a history
+    //update it
+    let { userId: id } = currentUserHistory[0];
     // save the record on localStorage
     userHistory.map(userH => {
       if (userH.userId === id) {
         userH.history = {
           ...userH.history,
-          artist: [...userH.history.artist, searchValue]
+          //[...new Set - to remove duplicated values]
+          [resultType]: [
+            ...new Set([...userH.history[resultType], searchValue])
+          ]
         };
       }
     });
+    localStorage.setItem("userHistory", JSON.stringify([...userHistory]));
   }
-
-  localStorage.setItem("userHistory", JSON.stringify([...userHistory]));
 };
 
 //get storage result from localStorage
@@ -54,5 +82,6 @@ export const getResultFromHistory = userId => {
   const currentUserHistory = userHistory.filter(
     history => history.userId === userId
   );
-  return currentUserHistory || [];
+  //return the current users history
+  return currentUserHistory[0].history || [];
 };

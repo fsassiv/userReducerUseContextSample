@@ -1,21 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./HistoryContainer.scss";
+import { HistoryActionTypes } from "../../store/actionTypes";
+import { HistoryContext } from "../../store/HistoryContext";
 // import HistoryArtistList from "./HistoryArtistList";
 // import HistoryAlbumList from "./HistoryAlbumList";
 import HistoryList from "./HistoryList";
 
 const HistoryContainer = props => {
-  const [tabOne, setTabOne] = useState(true);
+  const { historyState, historyDispatch } = useContext(HistoryContext);
+  const [listSrc, setListSrc] = useState({});
+  const [listType, setListType] = useState("artist");
 
   const handleTabBtnClick = event => {
     event.preventDefault();
 
-    //by default set tabOne to true
-    setTabOne(true);
     if (event.target.id !== "tab-one-btn") {
-      setTabOne(false);
+      setListType("album");
+    } else {
+      setListType("artist");
     }
   };
+
+  useEffect(() => {
+    if (historyState.history !== null) {
+      if (listType === "artist") {
+        setListSrc({ ...historyState.history });
+        return;
+      }
+      setListSrc({ ...historyState.history });
+    }
+  }, [historyState]);
 
   return (
     <div className="history">
@@ -25,7 +39,7 @@ const HistoryContainer = props => {
           href="#"
           id="tab-one-btn"
           onClick={handleTabBtnClick}
-          className={`history__tab-btn ${tabOne && "active"}`}
+          className={`history__tab-btn ${listType === "artist" && "active"}`}
         >
           Artistas
         </a>
@@ -33,15 +47,15 @@ const HistoryContainer = props => {
           href="#"
           id="tab-two-btn"
           onClick={handleTabBtnClick}
-          className={`history__tab-btn ${!tabOne && "active"}`}
+          className={`history__tab-btn ${listType === "album" && "active"}`}
         >
           Álbuns
         </a>
       </div>
-      <div className="history__tab-wrapper">
-        {/* {tabOne ? <HistoryArtistList /> : <HistoryAlbumList />} */}
-        {/* <HistoryList listType listSrc={[]} /> */}
-      </div>
+      {listSrc[listType] && (
+        <HistoryList listType={listType} listSrc={listSrc[listType]} />
+      )}
+      {!(Object.entries(listSrc).length>0 && listSrc[listType].length>0)?<p>Você ainda não possui históricos de busca...</p>:""}
     </div>
   );
 };

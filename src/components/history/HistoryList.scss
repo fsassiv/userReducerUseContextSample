@@ -1,0 +1,17 @@
+.list__item {
+  &-wrapper {
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  &-item {
+    background-color: black;
+    margin: 2px 0;
+    border-radius: 4px;
+    padding: 6px;
+    padding-left: 5%;
+    font-weight: 300;
+    color: white;
+    text-transform: capitalize;
+  }
+}

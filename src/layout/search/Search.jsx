@@ -13,11 +13,12 @@ import {
 import "./Search.scss";
 import fetchResult from "../../api/lastfm";
 import SearchList from "./SearchList";
-import { saveResultInHistory } from "../../api/history";
+import { saveResultInHistory, getResultFromHistory } from "../../api/history";
 import { UserContext } from "../../store/UserContext";
-import { UserActionTypes } from "../../store/actionTypes";
+import { HistoryContext } from "../../store/HistoryContext";
+import { UserActionTypes, HistoryActionTypes } from "../../store/actionTypes";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     height: "50px"
   },
@@ -30,6 +31,7 @@ const useStyles = makeStyles(theme => ({
 const Search = () => {
   //get logged user info
   const { userState, userDispatch } = useContext(UserContext);
+  const { historyState, historyDispatch } = useContext(HistoryContext);
 
   const classes = useStyles();
   const [searchValue, setSearchValue] = useState("");
@@ -43,8 +45,6 @@ const Search = () => {
       event.preventDefault();
     }
 
-    //clear the previous result
-    // setResult("");
     //check if the searchValue is not empty
     if (searchValue !== "") {
       const data = await fetchResult({ target, searchValue, page });
@@ -89,7 +89,7 @@ const Search = () => {
         searchValue
       });
     }
-  }, [target, page]);
+  }, [page]);
 
   //update result on result and changes
   useEffect(() => {
@@ -101,8 +101,14 @@ const Search = () => {
         searchValue
       });
     }
-    console.log("effect 2");
   }, [result]);
+
+  useEffect(() => {
+    historyDispatch({
+      type: HistoryActionTypes.SET_USER_HISTORY,
+      payload: getResultFromHistory(userState.user.id)
+    });
+  }, [page, result, target]);
 
   return (
     <div className="search">

@@ -2,6 +2,7 @@
   min-height: 200px;
   width: 50%;
   &__top {
+    margin-bottom: 10px;
   }
   &__tab {
     &-btn {
@@ -10,9 +11,6 @@
       &.active {
         font-weight: bold;
       }
-    }
-    &-wrapper {
-      padding-top: 10px;
     }
   }
 }

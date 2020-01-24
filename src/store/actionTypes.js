@@ -11,5 +11,6 @@ export const UserActionTypes = {
 };
 
 export const HistoryActionTypes = {
-  DEFAULT_ACTION: "DEFAULT_ACTION:"
+  SET_USER_ARTIST: "SET_USER_ARTIST",
+  SET_USER_HISTORY:"SET_USER_HISTORY"
 };
