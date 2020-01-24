@@ -73,7 +73,7 @@ function App(props) {
             }
           />
           {/* Catch all route */}
-          <Route path="*" render={() => <Redirect to="/reactmusic" />} />
+          <Route path="*" render={() => <Redirect to="/" />} />
         </Suspense>
       </Switch>
       {/* </Router> */}
