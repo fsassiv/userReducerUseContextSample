@@ -62,7 +62,7 @@ function Home(props) {
     <aside className="home__aside">
       <img className="home__brand aside" src={brandMb} alt="react Music" />
       <div className="home__user-info">
-        <p className="user-info-text light">Bem vindo,</p>
+        <p className="user-info-text light">Bem vindo(a),</p>
         <p className="user-info-text bold">
           {userState.user.name.replace(/^\w/, c => c.toUpperCase())}
         </p>
