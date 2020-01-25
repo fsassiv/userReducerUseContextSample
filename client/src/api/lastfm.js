@@ -17,13 +17,15 @@ export default async ({ target, searchValue, page }) => {
       `${apiSettings.baseUrl}?method=${target}.search&${target}=${searchValue}&api_key=${apiSettings.key}&page=${page}&format=json`,
       {
         headers: {
-          Accept: "application/json"
+          Accept: "application/json",
+          "Content-Type": "application/json"
         }
       }
     );
     const { data } = response;
-    return data;
+    return { data, error: { error: false } };
   } catch (error) {
-    return { statusCode: "404", error: "Result not found" };
+    console.log(error);
+    return { error: true, errorMessage: "Desculpe, algo deu errado" };
   }
 };

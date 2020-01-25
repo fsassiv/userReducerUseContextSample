@@ -39,6 +39,7 @@ const Search = () => {
   const [result, setResult] = useState("");
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
+  const [error, setError] = useState({ error: false, errorMessage: null });
 
   const handleSearch = async event => {
     if (event) {
@@ -47,13 +48,20 @@ const Search = () => {
 
     //check if the searchValue is not empty
     if (searchValue !== "") {
-      const data = await fetchResult({ target, searchValue, page });
-      setTotal(data.results["opensearch:totalResults"]);
-      if (target === "artist") {
-        setResult(data.results.artistmatches);
-      }
-      if (target === "album") {
-        setResult(data.results.albummatches);
+      const { data, error } = await fetchResult({ target, searchValue, page });
+
+      if (error.error) {
+        setError({ ...error });
+      } else {
+        setError({ error: false, errorMessage: null });
+
+        setTotal(data.results["opensearch:totalResults"]);
+        if (target === "artist") {
+          setResult(data.results.artistmatches);
+        }
+        if (target === "album") {
+          setResult(data.results.albummatches);
+        }
       }
     }
   };
@@ -81,24 +89,34 @@ const Search = () => {
     //fires a new search after target or page change their values
     handleSearch();
 
-    if (searchValue !== "") {
+    if (searchValue !== "" && result[target].length > 0) {
       saveResultInHistory({
         userId: userState.user.id,
         resultType: target,
         resultValue: result,
         searchValue
       });
+    } else {
+      setError({
+        error: true,
+        errorMessage: `Nenhum resultado encontrato para ${searchValue}`
+      });
     }
   }, [page]);
 
   //update result on result and changes
   useEffect(() => {
-    if (searchValue !== "") {
+    if (searchValue !== "" && result[target].length > 0) {
       saveResultInHistory({
         userId: userState.user.id,
         resultType: target,
         resultValue: result,
         searchValue
+      });
+    } else {
+      setError({
+        error: true,
+        errorMessage: `Nenhum resultado encontrato para ${searchValue}`
       });
     }
   }, [result]);
@@ -155,14 +173,13 @@ const Search = () => {
         </div>
       </form>
       {/* Render results */}
-      {result !== "" && (
+      {!error.error ? (
         <SearchList
-          listSrc={
-            result
-            // target === "artist" ? result.artistmatches : result.albummatches
-          }
+          listSrc={result}
           listType={target === "artist" ? "artist" : "album"}
         />
+      ) : (
+        <p>{error.errorMessage}</p>
       )}
       <div className="search__result-ctrl">
         <Button
