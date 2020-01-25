@@ -5,7 +5,7 @@ import { UserContext } from "./store/UserContext";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import { UserActionTypes } from "./store/actionTypes";
-import { getCurrentSession } from "./api/users";
+import { getCurrentSession, logOut } from "./api/users";
 
 //Routes
 const Home = lazy(() => import("./pages/home/Home.jsx"));
@@ -30,7 +30,9 @@ function App(props) {
 
   useEffect(() => {
     //check if the users db is set, if not create it
+    //and log out of any currentSession
     if (!localStorage.getItem("users")) {
+      logOut();
       localStorage.setItem("users", JSON.stringify([]));
     }
 

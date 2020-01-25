@@ -1,4 +1,7 @@
 import uniqid from "uniqid";
+import bcrypt from "bcryptjs";
+
+export const salt = 10;
 
 export const createNewUser = credentials => {
   const { name, email, password } = credentials;
@@ -8,7 +11,7 @@ export const createNewUser = credentials => {
     id: uniqid(),
     name: name.replace(/^\w/, c => c.toUpperCase()),
     email,
-    password
+    password: bcrypt.hashSync(password, salt)
   };
 
   //save newUser in store
@@ -27,7 +30,8 @@ export const logUser = credentials => {
   const userDB = JSON.parse(localStorage.getItem("users"));
 
   const registeredUser = userDB.filter(user => {
-    if (user.email === email && user.password === password) {
+    // if (user.email === email && user.password === password) {
+    if (user.email === email && bcrypt.compareSync(password, user.password)) {
       return user;
     }
   });
