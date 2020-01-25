@@ -14,11 +14,9 @@ const Login = lazy(() => import("./pages/login/Login.jsx"));
 const theme = createMuiTheme({
   palette: {
     primary: {
-      // Purple and green play nicely together.
       main: "#000"
     },
     secondary: {
-      // This is green.A700 as hex.
       main: "#fff"
     }
   },
