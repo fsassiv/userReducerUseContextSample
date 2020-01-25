@@ -3,10 +3,12 @@ const app = express();
 const helmet = require("helmet");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const PORT = process.env.PORT || 3000;
 
 //MIDDLEWARES
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(morgan("tiny"));
