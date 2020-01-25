@@ -23,6 +23,7 @@ export default async ({ target, searchValue, page }) => {
       }
     );
     const { data } = response;
+    console.log(data);
     return { data, error: { error: false } };
   } catch (error) {
     console.log(error);
