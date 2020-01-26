@@ -16,23 +16,23 @@ app.use(morgan("tiny"));
 app.use(bodyParser.json());
 
 //route for request
-app.get("/api", async (req, res) => {
-  const { target, searchvalue, page } = req.query;
-  try {
-    const response = await axios.get(
-      `https://ws.audioscrobbler.com/2.0/?method=${target}.search&${target}=${searchvalue}&api_key=${process.env.API_KEY}&page=${page}&format=json`,
-      {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-      }
-    );
-    res.send({ ...response, data: "Test" });
-  } catch (error) {
-    res.send(error);
-  }
-});
+// app.get("/api", async (req, res) => {
+//   const { target, searchvalue, page } = req.query;
+//   try {
+//     const response = await axios.get(
+//       `https://ws.audioscrobbler.com/2.0/?method=${target}.search&${target}=${searchvalue}&api_key=${process.env.API_KEY}&page=${page}&format=json`,
+//       {
+//         headers: {
+//           Accept: "application/json",
+//           "Content-Type": "application/json"
+//         }
+//       }
+//     );
+//     res.send({ ...response, data: "Test" });
+//   } catch (error) {
+//     res.send(error);
+//   }
+// });
 
 //deploy the build version for production
 if (process.env.NODE_ENV === "production") {

@@ -49,7 +49,7 @@ const Search = () => {
     //check if the searchValue is not empty
     if (searchValue !== "") {
       const { data, error } = await fetchResult({ target, searchValue, page });
-      console.log(data);
+      // console.log(data);
       if (error.error) {
         setError({ ...error });
       } else {
@@ -128,6 +128,11 @@ const Search = () => {
     });
     // console.log(getResultFromHistory(userState.user.id));
   }, [page, result, target]);
+
+  //reset page value when searchValue change
+  useEffect(() => {
+    setPage(1);
+  }, [searchValue]);
 
   return (
     <div className="search">
