@@ -27,6 +27,7 @@ app.get("/api", async (req, res) => {
       }
     }
   );
+  console.log(reponse);
   res.send("Here!", target, searchvalue, page);
 });
 
