@@ -28,7 +28,7 @@ app.get("/api", async (req, res) => {
         }
       }
     );
-    res.send(`Here ${target} v=${searcgvalue} P=${page}`);
+    res.send(`Here`);
   } catch (error) {
     res.send(error);
   }
