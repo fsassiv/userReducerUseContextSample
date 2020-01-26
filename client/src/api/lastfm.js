@@ -15,9 +15,7 @@ export default async ({ target, searchValue, page }) => {
   try {
     // request for production
     if (process.env.NODE_ENV === "production") {
-      const response = await axios.get(
-        `/api?target=${target}&searchvalue=${searchValue}&page=${page}`
-      );
+      const response = await axios.get(`/api`);
       const { data } = response;
       return { data, error: { error: false } };
     }
