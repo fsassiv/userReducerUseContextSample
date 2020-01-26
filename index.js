@@ -4,7 +4,6 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-// import { apiSettings } from "./client/src/api/lastfm";
 
 const PORT = process.env.PORT || 3000;
 
@@ -19,7 +18,7 @@ app.use(bodyParser.json());
 app.get("/api", async (req, res) => {
   const { target, searchvalue, page } = req.query;
   const response = await axios.get(
-    `https://ws.audioscrobbler.com/2.0/?method=${target}.search&${target}=${searchvalue}&api_key=${apiSettings.key}&page=${page}&format=json`,
+    `https://ws.audioscrobbler.com/2.0/?method=${target}.search&${target}=${searchvalue}&api_key=${process.env.API_KEY}&page=${page}&format=json`,
     {
       headers: {
         Accept: "application/json",
@@ -27,7 +26,7 @@ app.get("/api", async (req, res) => {
       }
     }
   );
-  console.log(reponse);
+  console.log(response);
   res.send("Here!", target, searchvalue, page);
 });
 
