@@ -16,11 +16,12 @@ export default async ({ target, searchValue, page }) => {
     // request for production
     if (process.env.NODE_ENV === "production") {
       const response = await axios.get(
-        `/api?target=${target}&searchvalue=${searchValue}&page=${page}`
+        `${apiSettings.baseUrl}?method=${target}.search&${target}=${searchValue}&api_key=${apiSettings.key}&page=${page}&format=json`
       );
       const { data } = response;
       return { data, error: { error: false } };
     }
+
     //default request - development
     const response = await axios.get(
       `${apiSettings.baseUrl}?method=${target}.search&${target}=${searchValue}&api_key=${apiSettings.key}&page=${page}&format=json`,
