@@ -18,7 +18,7 @@ export default async ({ target, searchValue, page }) => {
       const response = await axios.get(
         // `/api/?target=${target}&searchvalue=${searchValue}&page=${page}`
         // `${apiSettings.baseUrl}?method=${target}.search&${target}=${searchValue}&api_key=${apiSettings.key}&page=${page}&format=json`,
-        `https://ws.audioscrobbler.com/2.0/?method=artist.search&artist=slipknot&api_key=${process.env.API_KEY}&page=${page}&format=json`,
+        `https://ws.audioscrobbler.com/2.0/?method=artist.search&artist=slipknot&api_key=23d94315217c996868a5f3feb48f00c3&page=${page}&format=json`,
 
         {
           headers: {
