@@ -15,10 +15,10 @@ export default async ({ target, searchValue, page }) => {
   try {
     // request for production
     if (process.env.NODE_ENV === "production") {
-      const data = await axios.get(
+      const response = await axios.get(
         `/api?target=${target}&searchvalue=${searchValue}&page=${page}`
       );
-      // const { data } = response;
+      const { data } = response;
       return { data, error: { error: false } };
     }
     //default request - development
