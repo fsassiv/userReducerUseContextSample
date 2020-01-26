@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.get("/api", async (req, res) => {
   const { target, searchValue, page } = req.query;
   const response = await axios.get(
-    `${apiSettings.baseUrl}?method=${target}.search&${target}=${searchValue}&api_key=${apiSettings.key}&page=${page}&format=json`
+    `https://ws.audioscrobbler.com/2.0/?method=${target}.search&${target}=${searchValue}&api_key=${apiSettings.key}&page=${page}&format=json`
   );
   res.send(response);
 });
