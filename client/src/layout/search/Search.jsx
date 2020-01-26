@@ -49,7 +49,7 @@ const Search = () => {
     //check if the searchValue is not empty
     if (searchValue !== "") {
       const { data, error } = await fetchResult({ target, searchValue, page });
-
+      console.log(`Data:${data}, Error:${error}`);
       if (error.error) {
         setError({ ...error });
       } else {

@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const apiSettings = {
+export const apiSettings = {
   baseUrl: "https://ws.audioscrobbler.com/2.0/",
   key: "23d94315217c996868a5f3feb48f00c3"
 };
 
 if (process.env.NODE_ENV === "production") {
   //CHANGE SETTINGS ON PRODUCTION
-  apiSettings.baseUrl = process.env.BASE_URL;
+  apiSettings.baseUrl = "/api/";
   apiSettings.key = process.env.API_KEY;
 }
 
@@ -23,7 +23,6 @@ export default async ({ target, searchValue, page }) => {
       }
     );
     const { data } = response;
-    console.log(data);
     return { data, error: { error: false } };
   } catch (error) {
     console.log(error);
