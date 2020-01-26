@@ -18,10 +18,16 @@ app.use(bodyParser.json());
 //route for request
 app.get("/api", async (req, res) => {
   const { target, searchvalue, page } = req.query;
-  // const response = await axios.get(
-  //   `https://ws.audioscrobbler.com/2.0/?method=${target}.search&${target}=${searchvalue}&api_key=${apiSettings.key}&page=${page}&format=json`
-  // );
-  res.send("Here!");
+  const response = await axios.get(
+    `https://ws.audioscrobbler.com/2.0/?method=${target}.search&${target}=${searchvalue}&api_key=${apiSettings.key}&page=${page}&format=json`,
+    {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    }
+  );
+  res.send("Here!", target, searchvalue, page);
 });
 
 //deploy the build version for production

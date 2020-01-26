@@ -7,12 +7,20 @@ export const apiSettings = {
 
 if (process.env.NODE_ENV === "production") {
   //CHANGE SETTINGS ON PRODUCTION
-  apiSettings.baseUrl = "/api";
+  apiSettings.baseUrl = "/api/";
   apiSettings.key = process.env.API_KEY;
 }
 
 export default async ({ target, searchValue, page }) => {
   try {
+    //request for development
+    if (process.env.NODE_ENV === "production") {
+      const response = await axios.get(
+        `/api?target=${target}&searchvalue=${searchValue}&page=${page}`
+      );
+      const { data } = response;
+      return { data, error: { error: false } };
+    }
     const response = await axios.get(
       `${apiSettings.baseUrl}?method=${target}.search&${target}=${searchValue}&api_key=${apiSettings.key}&page=${page}&format=json`,
       {
