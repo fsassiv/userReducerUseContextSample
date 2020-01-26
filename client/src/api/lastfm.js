@@ -7,7 +7,7 @@ export const apiSettings = {
 
 if (process.env.NODE_ENV === "production") {
   //CHANGE SETTINGS ON PRODUCTION
-  apiSettings.baseUrl = "/api/";
+  apiSettings.baseUrl = process.env.BASE_URL;
   apiSettings.key = process.env.API_KEY;
 }
 
@@ -25,6 +25,7 @@ export default async ({ target, searchValue, page }) => {
     const { data } = response;
     return { data, error: { error: false } };
   } catch (error) {
+    console.log(error);
     return { error: true, errorMessage: "Desculpe, algo deu errado" };
   }
 };
