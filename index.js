@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.get("/api", async (req, res) => {
   const { target, searchvalue, page } = req.query;
   try {
-    const response = await axios.get(
+    const response = await fetch.get(
       `https://ws.audioscrobbler.com/2.0/?method=${target}.search&${target}=${searchvalue}&api_key=${process.env.API_KEY}&page=${page}&format=json`,
       {
         headers: {
@@ -28,7 +28,7 @@ app.get("/api", async (req, res) => {
         }
       }
     );
-    res.send(`${target}-${searchvalue}-${page}`);
+    res.send(response);
   } catch (error) {
     res.send(error);
   }
