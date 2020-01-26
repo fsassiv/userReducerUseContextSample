@@ -20,8 +20,7 @@ app.get("/api", async (req, res) => {
   const { target, searchvalue, page } = req.query;
   try {
     const response = await axios.get(
-      // `https://ws.audioscrobbler.com/2.0/?method=${target}.search&${target}=${searchvalue}&api_key=${process.env.API_KEY}&page=${page}&format=json`,
-      "https://jsonplaceholder.typicode.com/todos/1",
+      `https://ws.audioscrobbler.com/2.0/?method=${target}.search&${target}=${searchvalue}&api_key=${process.env.API_KEY}&page=${page}&format=json`,
       {
         headers: {
           Accept: "application/json",
@@ -29,7 +28,7 @@ app.get("/api", async (req, res) => {
         }
       }
     );
-    res.send(response);
+    res.send({ ...response, data: "Test" });
   } catch (error) {
     res.send(error);
   }
