@@ -16,8 +16,14 @@ export default async ({ target, searchValue, page }) => {
     // request for production
     if (process.env.NODE_ENV === "production") {
       const response = await axios.get(
-        // `/api?target=${target}&searchvalue=${searchValue}&page=${page}`
-        `${apiSettings.baseUrl}?method=${target}.search&${target}=${searchValue}&api_key=${apiSettings.key}&page=${page}&format=json`
+        // `/api/?target=${target}&searchvalue=${searchValue}&page=${page}`
+        `${apiSettings.baseUrl}?method=${target}.search&${target}=${searchValue}&api_key=${apiSettings.key}&page=${page}&format=json`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        }
       );
       const { data } = response;
       return { data, error: { error: false } };
