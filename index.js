@@ -20,7 +20,7 @@ app.get("/api", async (req, res) => {
   const { target, searchvalue, page } = req.query;
   try {
     const response = await axios.get(
-      `https://ws.audioscrobbler.com/2.0/?method=${artist}.search&${artist}=${slipknot}&api_key=${process.env.API_KEY}&page=${page}&format=json`,
+      `https://ws.audioscrobbler.com/2.0/?method=${target}.search&${target}=${searchvalue}&api_key=${process.env.API_KEY}&page=${page}&format=json`,
       {
         headers: {
           Accept: "application/json",
