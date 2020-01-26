@@ -28,7 +28,7 @@ app.get("/api", async (req, res) => {
         }
       }
     );
-    res.send(response);
+    res.send(`${target}-${searchvalue}-${page}`);
   } catch (error) {
     res.send(error);
   }
