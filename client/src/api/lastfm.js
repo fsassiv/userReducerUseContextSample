@@ -13,6 +13,16 @@ if (process.env.NODE_ENV === "production") {
 
 export default async ({ target, searchValue, page }) => {
   try {
+    //request for development
+    if (process.env.NODE_ENV === "production") {
+      const response = await axios.get(
+        `/api?target=${target}&searchvalue=${searchValue}&page=${page}`
+      );
+      const { data } = response;
+      return { data, error: { error: false } };
+    }
+
+    //default resquet route
     const response = await axios.get(
       `${apiSettings.baseUrl}?method=${target}.search&${target}=${searchValue}&api_key=${apiSettings.key}&page=${page}&format=json`,
       {
@@ -25,7 +35,6 @@ export default async ({ target, searchValue, page }) => {
     const { data } = response;
     return { data, error: { error: false } };
   } catch (error) {
-    console.log(error);
     return { error: true, errorMessage: "Desculpe, algo deu errado" };
   }
 };

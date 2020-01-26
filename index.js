@@ -4,6 +4,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+import { apiSettings } from "./client/src/api/lastfm";
 
 const PORT = process.env.PORT || 3000;
 
@@ -16,7 +17,11 @@ app.use(bodyParser.json());
 
 //route for request
 app.get("/api", async (req, res) => {
-  res.send("Here!");
+  const { target, searchValue, page } = req.query;
+  const response = await axios.get(
+    `${apiSettings.baseUrl}?method=${target}.search&${target}=${searchValue}&api_key=${apiSettings.key}&page=${page}&format=json`
+  );
+  res.send(response);
 });
 
 //deploy the build version for production
