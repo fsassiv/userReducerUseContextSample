@@ -7,7 +7,7 @@ export const apiSettings = {
 
 if (process.env.NODE_ENV === "production") {
   //CHANGE SETTINGS ON PRODUCTION
-  apiSettings.baseUrl = process.env.BASE_URL;
+  apiSettings.baseUrl = "/api";
   apiSettings.key = process.env.API_KEY;
 }
 
