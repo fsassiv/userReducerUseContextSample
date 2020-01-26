@@ -28,7 +28,7 @@ app.get("/api", async (req, res) => {
         }
       }
     );
-    res.send({ ...response });
+    res.send(response);
   } catch (error) {
     res.send(error);
   }
