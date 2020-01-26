@@ -4,7 +4,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-import { apiSettings } from "./client/src/api/lastfm";
+// import { apiSettings } from "./client/src/api/lastfm";
 
 const PORT = process.env.PORT || 3000;
 
