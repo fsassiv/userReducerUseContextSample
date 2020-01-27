@@ -47,7 +47,7 @@ export const setCurrentSession = ({ id, name, email }) => {
   sessionStorage.setItem("currentSession", session);
 };
 
-export const getCurrentSession = userId => {
+export const getCurrentSession = () => {
   return JSON.parse(sessionStorage.getItem("currentSession"));
 };
 

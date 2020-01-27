@@ -1,9 +1,8 @@
 //save result of user search in localStorage
 //provite JSON.parse(localStorage.getItem("userHistory")) as default value
-export const createUserHistory = ({
-  userHistory = JSON.parse(localStorage.getItem("userHistory")),
-  currentUserId
-}) => {
+export const createUserHistory = currentUserId => {
+  let userHistory = JSON.parse(localStorage.getItem("userHistory"));
+
   let newHistory = {
     userId: currentUserId,
     history: {
@@ -11,13 +10,22 @@ export const createUserHistory = ({
       album: []
     }
   };
+  //if there is no userHistory, create it
+  //and set the first record
   if (!userHistory) {
     localStorage.setItem("userHistory", JSON.stringify([{ ...newHistory }]));
   } else {
-    localStorage.setItem(
-      "userHistory",
-      JSON.stringify([...userHistory, newHistory])
+    //check for userHistory of the currentUser
+    const registeredUserHistory = userHistory.filter(
+      history => history.userId === currentUserId
     );
+    //if is a new user, create its history
+    if (registeredUserHistory.length === 0) {
+      localStorage.setItem(
+        "userHistory",
+        JSON.stringify([...userHistory, newHistory])
+      );
+    }
   }
 };
 

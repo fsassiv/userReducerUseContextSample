@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import AppListItem from "./../../misc/AppListItem";
+import AppListItem from "../../components/misc/AppListItem";
 
 const SearchList = ({ listSrc, listType }) => {
   const [list, setList] = useState([]);

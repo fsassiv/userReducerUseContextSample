@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import "./Home.scss";
-import AppButton from "../../misc/AppButton";
+import AppButton from "../../components/misc/AppButton";
 import { UserContext } from "./../../store/UserContext";
 import { UserActionTypes } from "./../../store/actionTypes";
 import { createUserHistory } from "../../api/history";
@@ -86,9 +86,8 @@ function Home(props) {
       //Redirect not logged user
       history.push("/reactmusic/login");
     }
-
     //make sure the userHistory is set
-    createUserHistory({ currentUserId: currentUser.id });
+    createUserHistory(currentUser.id);
   }, []);
 
   return (

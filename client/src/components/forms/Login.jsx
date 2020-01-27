@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import AppInput from "../../misc/AppInput";
+import AppInput from "../misc/AppInput";
 import { Alert } from "@material-ui/lab";
 import { Typography } from "@material-ui/core";
 import { logUser } from "../../api/users";
