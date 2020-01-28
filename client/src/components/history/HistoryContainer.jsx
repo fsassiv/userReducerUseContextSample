@@ -1,9 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import "./HistoryContainer.scss";
-// import { HistoryActionTypes } from "../../store/actionTypes";
 import { HistoryContext } from "../../store/HistoryContext";
-// import HistoryArtistList from "./HistoryArtistList";
-// import HistoryAlbumList from "./HistoryAlbumList";
 import HistoryList from "./HistoryList";
 
 const HistoryContainer = props => {
@@ -27,6 +24,7 @@ const HistoryContainer = props => {
         setListSrc({ ...historyState.history });
         return;
       }
+      //fallback to
       setListSrc({ ...historyState.history });
     }
   }, [historyState]);
