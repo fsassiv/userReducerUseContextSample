@@ -28,3 +28,12 @@ Folder: "./client"
 Para executar a versão local, acese a pasta cliente no terminal e execute "npm start" como de padrão à aplicações CRA.
 
 Rota inical "/" ou "/reactmusic"
+
+#### Teste
+Biblioteca utilizada para teste
+- Jest, Enzyme
+
+#####componentes testados:
+- "/client/src/components/misc/AppButton.jsx"
+- "/client/src/components/misc/AppInput.jsx"
+- "/client/src/components/misc/AppListItem.jsx"

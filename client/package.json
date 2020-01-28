@@ -9,8 +9,6 @@
   "dependencies": {
     "@material-ui/core": "^4.8.3",
     "@material-ui/lab": "^4.0.0-alpha.39",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.1",
     "bcryptjs": "^2.4.3",
     "http-proxy-middleware": "^0.20.0",
@@ -24,7 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --watch",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
@@ -50,7 +48,9 @@
     "@storybook/addons": "^5.3.9",
     "@storybook/preset-create-react-app": "^1.5.2",
     "@storybook/react": "^5.3.9",
-    "@testing-library/dom": "^6.11.0",
-    "@testing-library/react": "^9.4.0"
+    "babel-preset-env": "^1.7.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "identity-obj-proxy": "^3.0.0"
   }
 }

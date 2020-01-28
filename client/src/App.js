@@ -71,7 +71,11 @@ function App(props) {
             }
           />
           {/* Catch all route */}
-          <Route path="*" render={() => <Redirect to="/reactmusic" />} />
+          {process.env.NODE_ENV === "production" ? (
+            <Route path="*" render={() => <Redirect to="/" />} />
+          ) : (
+            <Route path="*" render={() => <Redirect to="/reactmusic" />} />
+          )}
         </Suspense>
       </Switch>
       {/* </Router> */}

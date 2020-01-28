@@ -10,6 +10,7 @@ function AppButton({ btnLabel, btnHandleClick }) {
       disableElevation
       onClick={btnHandleClick}
       style={{ height: "40px", fontWeight: "lighter", width: "100%" }}
+      className="appBtn"
     >
       {btnLabel}
     </Button>
