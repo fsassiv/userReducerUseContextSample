@@ -8,6 +8,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 #### Estrutura da aplicação
 
+- Principais Frameworks e Libs utilizados:
+  React - CRA, Express(servidos Heroku), Material-UI, Jest, Enzyme
+
 Folder: "./"
 File: index.js
 
